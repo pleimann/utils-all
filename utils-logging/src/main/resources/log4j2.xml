@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO" name="XMLConfig" packages="com.asynchrony">
+    <Appenders>
+        <Console name="STDOUT">
+            <PatternLayout pattern="%date{ISO8601}.%nano [%thread] %highlight{%-5level} %logger{30} - %msg%n%throwable{none}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <Root level="TRACE">
+            <AppenderRef ref="STDOUT"/>
+        </Root>
+    </Loggers>
+</Configuration>

@@ -1,0 +1,3 @@
+rootProject.name = 'utils-all'
+
+include 'utils-random', 'utils-logging', 'utils-xml'
