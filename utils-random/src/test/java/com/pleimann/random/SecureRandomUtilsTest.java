@@ -37,6 +37,15 @@ public class SecureRandomUtilsTest {
     }
 
     @Test
+    public void testGenerateSecureRandomStringNegativeLength() {
+        int n = -15;
+
+        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+
+        checkResult(20, randomString);
+    }
+
+    @Test
     public void testGenerateSecureRandomStringMinLength() {
         int n = 15;
 

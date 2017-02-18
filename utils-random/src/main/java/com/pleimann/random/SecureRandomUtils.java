@@ -16,8 +16,10 @@ public class SecureRandomUtils {
     }
 
     public static final CharSequence generateSecureRandomCharSequence(int length){
+        int nominalLength = Math.min(MAX_RANDOM_STRING_LENGTH, Math.max(length, MIN_RANDOM_STRING_LENGTH));
+
         // Calculate the number of bytes of entropy necessary to generate a Base64 string of requested length
-        int bytesLength = calculateByteLength(Math.min(MAX_RANDOM_STRING_LENGTH, Math.max(length, MIN_RANDOM_STRING_LENGTH)));
+        int bytesLength = calculateByteLength(nominalLength);
 
         SecureRandom random = new SecureRandom();
 
@@ -33,9 +35,9 @@ public class SecureRandomUtils {
 
         CharSequence result = StandardCharsets.ISO_8859_1.decode(randomBase64Bytes);
 
-        // The length calculation can for some lengths
+        // The byte length calculation can for some lengths
         // (ex. length=49) result in an extra character
-        return result.subSequence(0, length);
+        return result.subSequence(0, nominalLength);
     }
 
     private static final int calculateByteLength(int length){
