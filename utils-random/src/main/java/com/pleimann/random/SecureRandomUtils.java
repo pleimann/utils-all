@@ -8,14 +8,14 @@ import java.security.SecureRandom;
 import java.util.Arrays;
 
 public class SecureRandomUtils {
-    private static final int MIN_RANDOM_STRING_LENGTH = 20;
+    private static final int MIN_RANDOM_STRING_LENGTH = 30;
     private static final int MAX_RANDOM_STRING_LENGTH = 1000;
 
-    public static final CharSequence generateSecureRandomCharSequence() {
-        return generateSecureRandomCharSequence(MIN_RANDOM_STRING_LENGTH);
+    public static final CharSequence generateSecureRandomPassword() {
+        return generateSecureRandomPassword(MIN_RANDOM_STRING_LENGTH);
     }
 
-    public static final CharSequence generateSecureRandomCharSequence(int length){
+    public static final CharSequence generateSecureRandomPassword(int length){
         int nominalLength = Math.min(MAX_RANDOM_STRING_LENGTH, Math.max(length, MIN_RANDOM_STRING_LENGTH));
 
         // Calculate the number of bytes of entropy necessary to generate a Base64 string of requested length

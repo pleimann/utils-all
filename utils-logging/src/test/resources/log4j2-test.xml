@@ -1,23 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO" name="XMLConfig" packages="com.asynchrony">
     <Appenders>
-        <ScriptAppenderSelector name="SelectIt">
-            <Script language="JavaScript"><![CDATA[
-                importPackage(java.lang);
-                System.getProperty("os.name").search("Windows") > -1 ? "STDOUT" : "MySyslogAppender";]]>
-            </Script>
-            <AppenderSet>
-                <Console name="STDOUT">
-                    <PatternLayout pattern="%date{ISO8601}.%nano [%thread] %highlight{%-5level} %logger{30} - %msg%n%throwable{none}"/>
-                </Console>
-                <List name="LIST" />
-            </AppenderSet>
-        </ScriptAppenderSelector>
+        <List name="LIST" />
+        <Console name="STDOUT">
+            <PatternLayout pattern="%date{ISO8601} %nano (%thread) [%highlight{%-5level}] %logger{36} %msg — %ex{short.message}%n%throwable{none}"/>
+        </Console>
     </Appenders>
 
     <Loggers>
         <Root level="TRACE">
-            <AppenderRef ref="SelectIt" />
+            <AppenderRef ref="STDOUT" />
+            <AppenderRef ref="LIST" />
         </Root>
     </Loggers>
 </Configuration>

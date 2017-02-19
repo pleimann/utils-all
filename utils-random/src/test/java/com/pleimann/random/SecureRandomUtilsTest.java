@@ -16,22 +16,30 @@ public class SecureRandomUtilsTest {
         errors.checkThat(randomString, not(containsString("=")));
         errors.checkThat(randomString.length(), is(equalTo(n)));
         errors.checkThat(Base64.isBase64(randomString), is(true));
+
+        // Estimate of entropy bits
+        // n: password length
+        // c: password cardinality: the size of the symbol space
+        double entropy = n * Math.log(64); // base 2 log;
+
+        System.out.println(String.format("Entropy: %f Pass: %s", entropy, randomString));
+        errors.checkThat(entropy, is(greaterThanOrEqualTo(120.0)));
     }
 
     @Test
     public void testGenerateSecureRandomString() {
         int n = 50;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
         checkResult(n, randomString);
     }
 
     @Test
     public void testGenerateSecureRandomStringWithLength() {
-        int n = 23;
+        int n = 36;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
         checkResult(n, randomString);
     }
@@ -40,25 +48,25 @@ public class SecureRandomUtilsTest {
     public void testGenerateSecureRandomStringNegativeLength() {
         int n = -15;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
-        checkResult(20, randomString);
+        checkResult(30, randomString);
     }
 
     @Test
     public void testGenerateSecureRandomStringMinLength() {
         int n = 15;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
-        checkResult(20, randomString);
+        checkResult(30, randomString);
     }
 
     @Test
     public void testGenerateSecureRandomStringMaxLength() {
         int n = 1000;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
         checkResult(n, randomString);
     }
@@ -67,7 +75,7 @@ public class SecureRandomUtilsTest {
     public void testGenerateSecureRandomStringGreaterThanMaxLength() {
         int n = 1487;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
         checkResult(1000, randomString);
     }
@@ -76,7 +84,7 @@ public class SecureRandomUtilsTest {
     public void testEnsureSecureRandomStringWithoutPadding() {
         int n = 49;
 
-        String randomString = SecureRandomUtils.generateSecureRandomCharSequence(n).toString();
+        String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
         checkResult(n, randomString);
     }
