@@ -20,10 +20,10 @@ public class SecureRandomUtilsTest {
         // Estimate of entropy bits
         // n: password length
         // c: password cardinality: the size of the symbol space
-        double entropy = n * Math.log(64); // base 2 log;
+        long entropy = n * 6;
 
-        System.out.println(String.format("Entropy: %f Pass: %s", entropy, randomString));
-        errors.checkThat(entropy, is(greaterThanOrEqualTo(120.0)));
+        System.out.println(String.format("Entropy: %d Pass: %s", entropy, randomString));
+        errors.checkThat(entropy, is(greaterThanOrEqualTo(120l)));
     }
 
     @Test
@@ -64,7 +64,7 @@ public class SecureRandomUtilsTest {
 
     @Test
     public void testGenerateSecureRandomStringMaxLength() {
-        int n = 1000;
+        int n = 100;
 
         String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
@@ -77,7 +77,7 @@ public class SecureRandomUtilsTest {
 
         String randomString = SecureRandomUtils.generateSecureRandomPassword(n).toString();
 
-        checkResult(1000, randomString);
+        checkResult(100, randomString);
     }
 
     @Test

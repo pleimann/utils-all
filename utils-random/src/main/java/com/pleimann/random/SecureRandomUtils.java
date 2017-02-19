@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class SecureRandomUtils {
     private static final int MIN_RANDOM_STRING_LENGTH = 30;
-    private static final int MAX_RANDOM_STRING_LENGTH = 1000;
+    private static final int MAX_RANDOM_STRING_LENGTH = 100;
 
     public static final CharSequence generateSecureRandomPassword() {
         return generateSecureRandomPassword(MIN_RANDOM_STRING_LENGTH);
