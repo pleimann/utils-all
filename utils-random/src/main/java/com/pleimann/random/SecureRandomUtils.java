@@ -26,11 +26,11 @@ public class SecureRandomUtils {
         byte[] randomBytes = new byte[bytesLength];
         random.nextBytes(randomBytes);
 
-        // Uses URL save version to avoid '=' padding characters
+        // Uses URL safe version to avoid '=' padding characters
         ByteBuffer randomBase64Bytes = ByteBuffer.wrap(Base64.encodeBase64URLSafe(randomBytes));
 
-        // clear array in memory. after return it will be out
-        // of scope and therefore eligible for garbage collection
+        // clear array in memory so that it's not hanging around until garbage collected.
+        // after return it will be out of scope and therefore eligible for garbage collection
         Arrays.fill(randomBytes, (byte)0);
 
         CharSequence result = StandardCharsets.ISO_8859_1.decode(randomBase64Bytes);
